@@ -3,7 +3,7 @@ import { expect, test } from '@nuxt/test-utils/playwright'
 test('test very basic form', async ({ page }) => {
   await page.goto('/', { waitUntil: 'networkidle' })
 
-  await expect(page.getByRole('button', { name: 'Send' })).toBeDisabled()
+  await expect(page.getByRole('button', { name: 'My custom send button' })).toHaveAttribute('aria-disabled', 'true')
   await page.getByRole('textbox', { name: 'Text Input' }).click()
   await page.getByRole('textbox', { name: 'Text Input' }).fill('asdasd')
   await page.getByRole('textbox', { name: 'Email' }).click()
@@ -22,7 +22,7 @@ test('test very basic form', async ({ page }) => {
   await page.getByRole('combobox', { name: 'Multiple Enum Input' }).click()
   await page.getByRole('option', { name: 'E' }).click()
   await page.getByRole('option', { name: 'A' }).click()
-  await page.mouse.click(0, 0)
+  await page.mouse.click(50, 50)
   await page.getByRole('button', { name: 'My custom send button' }).click()
-  await expect(page.getByRole('button', { name: 'My custom send button' })).toBeEnabled()
+  await expect(page.getByRole('button', { name: 'My custom send button' })).not.toHaveAttribute('aria-disabled', 'true')
 })
