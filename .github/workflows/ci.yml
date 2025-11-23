@@ -7,6 +7,7 @@ on:
   pull_request:
     branches:
       - master
+  workflow_dispatch:
 
 jobs:
   lint:
@@ -40,22 +41,26 @@ jobs:
       - run: npm i -g --force corepack@latest && corepack enable
 
       - name: Install dependencies
-        run: npx nypm@latest i
+        run: pnpm install
 
       - name: Playground prepare
-        run: npm run dev:prepare
+        run: pnpm run dev:prepare
 
       - name: Typecheck
-        run: npm run typecheck
+        run: pnpm run typecheck
 
-      - name: Cache Playwright binaries
-        uses: actions/cache@v4
+      - name: Get installed Playwright version for cache key
+        run: echo "PLAYWRIGHT_VERSION=$(yq eval '.version' --output-format=yaml ./node_modules/@playwright/test/package.json)" >> $GITHUB_ENV
+      - name: Cache Playwright browser binaries
+        uses: actions/cache@v3
+        id: playwright-browser-cache
         with:
-          path: ~/.cache/ms-playwright
-          key: ${{ runner.os }}-playwright-${{ hashFiles('pnpm-lock.yaml') }}
-
-      - name: Prepare for e2e tests
-        run: pnpm dlx playwright install chromium --with-deps
+          path: |
+            ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ env.PLAYWRIGHT_VERSION }}
+      - name: Install Playwright browsers only on cache miss
+        run: pnpm playwright install --with-deps chromium
+        if: steps.playwright-browser-cache.outputs.cache-hit != 'true'
 
       - name: E2E Test
         run: pnpm run e2e
