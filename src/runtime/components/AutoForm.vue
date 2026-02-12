@@ -3,6 +3,7 @@ import type { FormSubmitEvent, InferInput, InferOutput } from '@nuxt/ui'
 import type * as z from 'zod'
 import type { AutoFormConfig } from '../types'
 import { useAppConfig } from '#app'
+import { useAutoFormI18n } from '#imports'
 import UButton from '@nuxt/ui/components/Button.vue'
 import UForm from '@nuxt/ui/components/Form.vue'
 import UFormField from '@nuxt/ui/components/FormField.vue'
@@ -24,6 +25,7 @@ const emit = defineEmits<{
   (e: 'submit', data: InferOutput<T>): void
 }>()
 
+const { t } = useAutoFormI18n()
 const slots = useSlots()
 const state = reactive({ ...props.initialState })
 
@@ -79,11 +81,11 @@ function findSlots(key: string): string[] {
 
 function parseMeta(meta: any, key: string) {
   return {
-    label: meta.title ?? upperFirst(splitByCase(key).join(' ').toLowerCase()),
+    label: meta.title ? t(meta.title) : upperFirst(splitByCase(key).join(' ').toLowerCase()),
     required: meta.required,
-    description: meta.description,
-    hint: meta.hint,
-    help: meta.help,
+    description: meta.description ? t(meta.description) : undefined,
+    hint: meta.hint ? t(meta.hint) : undefined,
+    help: meta.help ? t(meta.help) : undefined,
     class: meta.theme?.floatRight ? 'flex items-center justify-between text-left' : '',
   }
 }
@@ -141,6 +143,7 @@ const submitButtonProps = computed(() => {
         :name="field.key"
         :field="field.key"
         :state="(state as Record<string, any>)"
+        :formField="field.formField"
       >
         <component
           :is="field.component"

@@ -37,5 +37,15 @@ export default defineNuxtModule<ModuleOptions>({
       prefix: 'AInput',
       pathPrefix: false,
     })
+
+    nuxt.hook('imports:extend', (imports) => {
+      if (imports.some(i => i.name === 'useAutoFormI18n'))
+        return
+
+      imports.push({
+        name: 'useAutoFormI18n',
+        from: resolver.resolve('runtime/composables/useAutoFormI18n.ts'),
+      })
+    })
   },
 })
