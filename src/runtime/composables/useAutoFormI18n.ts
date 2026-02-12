@@ -7,7 +7,7 @@ export const useAutoFormI18n = () => {
 
   if (!isEnabled.value) {
     const locale = useNuxtApp().$locale as string
-    const localeMessages = useNuxtApp().$localeMessages as Record<string, unknown>
+    const localeMessages = useNuxtApp().$autoFormMessages as Record<string, unknown>
 
     return {
       isEnabled,
