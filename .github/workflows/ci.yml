@@ -29,6 +29,7 @@ jobs:
         run: npm run lint
 
   test:
+    if: steps.lint.outcome == 'success'
     runs-on: ubuntu-latest
 
     steps:
@@ -64,7 +65,6 @@ jobs:
 
       - name: E2E Test
         run: pnpm run e2e
-
 
   publish-pkg:
     runs-on: ubuntu-latest

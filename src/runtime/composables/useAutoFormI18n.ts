@@ -1,7 +1,7 @@
 import type { LocaleObject } from '@nuxtjs/i18n'
 import { ref } from 'vue'
 
-export const useAutoFormI18n = () => {
+export function useAutoFormI18n() {
   const config = useRuntimeConfig().public
   const isEnabled = ref(!!config.i18n)
 

@@ -143,7 +143,7 @@ const submitButtonProps = computed(() => {
         :name="field.key"
         :field="field.key"
         :state="(state as Record<string, any>)"
-        :formField="field.formField"
+        :form-field="field.formField"
       >
         <component
           :is="field.component"
