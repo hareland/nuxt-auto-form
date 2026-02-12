@@ -14,13 +14,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
 
-      - uses: actions/setup-node@v4
+      - name: Install node
+        uses: actions/setup-node@v5
         with:
           node-version: 20
-
-      - run: npm i -g --force corepack@latest && corepack enable
+          cache: pnpm
 
       - name: Install dependencies
         run: npx nypm@latest i
@@ -32,14 +34,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-node@v4
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Install node
+        uses: actions/setup-node@v5
         with:
           node-version: 20
-
-      - run: npm i -g --force corepack@latest && corepack enable
-
+          cache: pnpm
       - name: Install dependencies
         run: pnpm install
 
@@ -81,10 +85,13 @@ jobs:
           cache: pnpm
 
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm i
 
-      - name: Packaging
+      - name: Prepack
         run: pnpm run prepack
+
+      - name: Prepare
+        run: pnpm run dev:prepare
 
       - name: Publish
         run: npx pkg-pr-new publish --compact '.'
