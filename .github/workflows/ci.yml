@@ -88,10 +88,7 @@ jobs:
         run: pnpm i
 
       - name: Prepack
-        run: pnpm run prepack
-
-      - name: Prepare
-        run: pnpm run dev:prepare
+        run: pnpm run prepare
 
       - name: Publish
         run: npx pkg-pr-new publish --compact '.'

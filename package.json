@@ -37,6 +37,7 @@
     "dist"
   ],
   "scripts": {
+    "prepare": "nuxi prepare",
     "prepack": "nuxt-module-build build",
     "dev": "pnpm run dev:prepare && nuxi dev playground",
     "dev:build": "nuxi build playground",
