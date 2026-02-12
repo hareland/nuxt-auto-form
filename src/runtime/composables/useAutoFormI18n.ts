@@ -22,6 +22,7 @@ export function useAutoFormI18n() {
     }
   }
 
+  // @ts-expect-error not typed
   const { locale, t } = useI18n()
   const filteredLocales = (config.docus as { filteredLocales: LocaleObject<string>[] })?.filteredLocales || []
 
@@ -30,7 +31,9 @@ export function useAutoFormI18n() {
     locale,
     locales: filteredLocales,
     t,
+    // @ts-expect-error not typed
     localePath: useLocalePath(),
+    // @ts-expect-error not typed
     switchLocalePath: useSwitchLocalePath(),
   }
 }
