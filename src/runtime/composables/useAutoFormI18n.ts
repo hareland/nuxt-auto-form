@@ -1,4 +1,5 @@
 import type { LocaleObject } from '@nuxtjs/i18n'
+import { useNuxtApp, useRuntimeConfig } from '#imports'
 import { ref } from 'vue'
 
 export function useAutoFormI18n() {
