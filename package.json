@@ -4,14 +4,16 @@
   "version": "0.5.0",
   "packageManager": "pnpm@10.14.0",
   "description": "Auto-generate Nuxt UI forms from Zod 4 schemas",
-  "author": {
-    "email": "me@norbiros.dev",
-    "name": "Norbiros",
-    "url": "https://norbiros.dev"
-  },
+  "authors": [
+    {
+      "email": "me@norbiros.dev",
+      "name": "Norbiros",
+      "url": "https://norbiros.dev"
+    }
+  ],
   "license": "MIT",
   "homepage": "https://nuxt-auto-form.norbiros.dev/",
-  "repository": "Norbiros/nuxt-auto-form",
+  "repository": "hareland/nuxt-auto-form",
   "keywords": [
     "nuxt",
     "nuxt-ui",
