@@ -1,5 +1,5 @@
 {
-  "name": "@hareland/nuxt-auto-form",
+  "name": "@norbiros/nuxt-auto-form",
   "type": "module",
   "version": "0.5.0",
   "packageManager": "pnpm@10.14.0",
@@ -9,11 +9,6 @@
       "email": "me@norbiros.dev",
       "name": "Norbiros",
       "url": "https://norbiros.dev"
-    },
-    {
-      "email": "packagist@proton.me",
-      "name": "hareland",
-      "url": "https://github.com/hareland"
     }
   ],
   "license": "MIT",
