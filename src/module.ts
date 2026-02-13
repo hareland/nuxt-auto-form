@@ -44,7 +44,7 @@ export default defineNuxtModule<ModuleOptions>({
 
       imports.push({
         name: 'useAutoFormI18n',
-        from: resolver.resolve('runtime/composables/useAutoFormI18n.ts'),
+        from: resolver.resolve('runtime/composables/useAutoFormI18n'),
       })
     })
   },
